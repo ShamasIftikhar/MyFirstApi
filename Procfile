@@ -1,1 +1,1 @@
-web: uvicorn app.main:app  --host=0.0.0.0 --port=process.env.PORT || 3112
+web: uvicorn app.main:app  --host=0.0.0.0 --port=${Port:3112}
