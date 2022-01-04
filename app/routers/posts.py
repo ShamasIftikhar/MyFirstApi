@@ -1,11 +1,9 @@
 from sys import prefix
 from typing import List, Optional
 from fastapi import FastAPI, status, HTTPException, Depends, APIRouter, Response
-from fastapi.responses import HTMLResponse
 from sqlalchemy.orm.session import Session
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.sql.functions import count
-from starlette.requests import Request
 from .. import schemas, models, oauth
 from ..database import get_db
 from fastapi.templating import Jinja2Templates
