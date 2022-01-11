@@ -5,7 +5,6 @@ from fastapi import FastAPI, status, HTTPException, Depends, APIRouter
 from pydantic.types import PositiveFloat
 from sqlalchemy.orm.session import Session
 from starlette.responses import Response
-from starlette.status import HTTP_201_CREATED, HTTP_409_CONFLICT
 from .. import schemas, oauth, models
 from ..database import get_db
 
