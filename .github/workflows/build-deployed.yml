@@ -1,7 +1,6 @@
 name: Build and Deployed Code
 
-on:  [push,pull_request]
-
+on: [push, pull_request]
 
 jobs:
   job1:
@@ -16,22 +15,35 @@ jobs:
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRATION_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRATION_MINUTES}}
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+          POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     runs-on: ubuntu-latest
     steps:
-    - name: pulling git reports
-      uses: actions/checkout@v2
-    - name: install python latest
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.10"
-    - name: update pip
-      run: python -m pip install --upgrade pip
-    - name : install all dependencies
-      run: pip install -r requirements.txt
-    - name: test with pytest
-      run: |
-        pip install pytest 
-        pip install requests
-        pytest
-      
-      
+      - name: pulling git reports
+        uses: actions/checkout@v2
+      - name: install python latest
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: update pip
+        run: python -m pip install --upgrade pip
+      - name: install all dependencies
+        run: pip install -r requirements.txt
+      - name: test with pytest
+        run: |
+          pip install pytest 
+          pip install requests
+          pytest
+
+          
