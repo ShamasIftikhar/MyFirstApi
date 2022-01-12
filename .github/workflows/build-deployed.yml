@@ -55,7 +55,7 @@ jobs:
       - name: pulling git reports
         uses: actions/checkout@v2
       - name: 'Deploy to Heroku'
-        run: akhileshns/heroku-deploy@v3.12.12
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APPNAME}}
