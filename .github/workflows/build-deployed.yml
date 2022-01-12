@@ -3,7 +3,7 @@ name: Build and Deployed Code
 on: [push, pull_request]
 
 jobs:
-  job1:
+  build:
     environment:
       name: testing
     env:
@@ -46,21 +46,28 @@ jobs:
           pip install requests
           pytest
        
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: ./
-          file: ./Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/shamas122:latest
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/shamas122:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/shamas122:buildcache,mode=max
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v1
+      #   with:
+      #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      # -
+      #   name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v1
+      # - name: Build and push
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: ./
+      #     file: ./Dockerfile
+      #     builder: ${{ steps.buildx.outputs.name }}
+      #     push: true
+      #     tags: ${{ secrets.DOCKER_HUB_USERNAME }}/shamas122:latest
+      #     cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/shamas122:buildcache
+      #     cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/shamas122:buildcache,mode=max
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - name: 'going to deploy'
