@@ -51,6 +51,6 @@ jobs:
 
     steps:
       - name: 'going to deploy'
-        run: echo"Hello"
+        run: echo "Hello"
 
       
