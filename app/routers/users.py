@@ -9,7 +9,7 @@ router =APIRouter(prefix="/users",tags=['Users'])
 def create_user(user:schemas.Users,db: Session = Depends(get_db)):
     res= db.query(models.Post).filter(user.email==models.User.email).first()
     if res:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=f'Email "{user.email}"already exist!')
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=f'Email\"{user.email}\" already exist!')
     user.password = utils.hash(user.password)
     new_user=models.User(**user.dict())
     db.add(new_user)
