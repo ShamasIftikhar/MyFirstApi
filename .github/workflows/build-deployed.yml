@@ -3,7 +3,7 @@ name: Build and Deployed Code
 on: [push, pull_request]
 
 jobs:
-  build:
+  build_1:
     environment:
       name: testing
     env:
