@@ -45,7 +45,6 @@ jobs:
           pip install pytest 
           pip install requests
           pytest
-       
   job_2:
     runs-on: ubuntu-latest
     needs: [job_1]
