@@ -18,7 +18,7 @@ def create_user(user: schemas.Users, db: Session = Depends(get_db)):
         return new_user
     elif res:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,
-                            detail=f'Email"\"{user.email}\"" already exist!')
+                            detail=f'Email \'{user.email}\' already exist!')
 
 
 @router.get("/{id}", response_model=schemas.GetUserResponse)
