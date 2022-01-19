@@ -1,5 +1,5 @@
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.expression import null, text
+from sqlalchemy.sql.expression import  text
 from sqlalchemy import Boolean,Integer,String,Column
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import TIMESTAMP
